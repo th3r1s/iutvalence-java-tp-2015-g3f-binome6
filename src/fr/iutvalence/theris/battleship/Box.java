@@ -45,14 +45,19 @@ public class Box {
 	}
 
 
-	public String toString(){
+	public String toString(boolean foe){
 		if(this.boat != null){
 			if(hitted && !boat.isSinked())
 				return "o";
 			if(hitted && boat.isSinked())
 				return "X";
-			if(!hitted && !boat.isSinked())
-				return "B";
+			if(!hitted && !boat.isSinked()){
+				if(!foe)
+					return "B";
+				else
+					return "*";
+			}
+			
 					
 		}
 		return (hitted ? "x" : "*");

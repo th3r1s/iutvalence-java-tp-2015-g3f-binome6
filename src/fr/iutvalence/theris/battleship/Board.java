@@ -29,7 +29,7 @@ public class Board {
 		this(NB_ROWS, NB_COLUMNS);
 	}
 	
-	public void createBoat(Direction direction, Location location, Boat boat){
+	public boolean createBoat(Direction direction, Location location, Boat boat){
 		Box[] relativesBoxes = boat.getRelativesBoxes();
 		relativesBoxes[0] = getBox(location);
 		relativesBoxes[0].setBoat(boat);
@@ -44,7 +44,10 @@ public class Board {
 			if(relativesBoxes[i] == null)
 				break;
 			relativesBoxes[i].setBoat(null);
-		}}
+			}
+			return false;
+		};
+		return true;
 		
 	}
 	
@@ -104,12 +107,12 @@ public class Board {
 		
 	}
 	
-	public String toString(){
+	public String toString(boolean foe){
 		String str = "";
 		for(int nbRow = 0; nbRow<rows;nbRow++){
 			str += "\n";
 			for(int nbCol = 0;nbCol<columns;nbCol++){
-				str += this.box[nbRow][nbCol].toString();
+				str += this.box[nbRow][nbCol].toString(foe);
 			}
 		}
 		
