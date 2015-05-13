@@ -2,7 +2,7 @@ package fr.iutvalence.theris.battleship;
 
 /**
  * @author Robin
- * @param <A>
+ * @param <A> 
  * @param <B>
  * classe paramétrée afin de gérer les pertes de parties
  */

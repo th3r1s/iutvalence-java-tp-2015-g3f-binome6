@@ -46,9 +46,10 @@ public class Game {
 	private List<Boat> player2Boats;
 	
 	/**
-	 * @param player1
-	 * @param player2
-	 * Constructeur d'une partie
+	 * Constructeur d'une partie.
+	 * 
+	 * @param player1 TODO
+	 * @param player2 TODO2
 	 */
 	public Game(Player player1, Player player2) {
 		this.player1 = player1;
@@ -67,7 +68,6 @@ public class Game {
 	 * Méthode d'une partie jouée
 	 */
 	public void play(){
-		// TODO réouverture du flux d'entrée ???  Question à poser
 		Scanner scan  = new Scanner(System.in);
 		init(scan);
 		Tuple<Boolean, String> tuple;
@@ -75,6 +75,7 @@ public class Game {
 			Player currentPlayer = (turn%2 == 0 ? player1 : player2);
 			Board currentBoard = (turn%2 == 0 ? boardPlayer1 : boardPlayer2);
 			Board currentFoeBoard = (turn%2 == 1 ? boardPlayer1 : boardPlayer2);
+			
 			System.out.println("Sur quelle ligne tirer");
 			int row = scan.nextInt();
 			System.out.println("Sur quelle colonne tirer ?");
@@ -86,25 +87,13 @@ public class Game {
 				System.out.println("Position en dehors du tableau");
 				continue;
 			}
-			if(currentPlayer.equals(player1)){
-				if(boardPlayer2.hit((location))){
-					turn++;
-					System.out.println(currentPlayer.getNickname());
-					System.out.println(currentBoard.toString(false));
-					System.out.println(currentFoeBoard.toString(true));
-				}
-			}else{
-				if(boardPlayer1.hit(location)){
-					turn++;
-					System.out.println(currentPlayer.getNickname());
-					System.out.println();
-					System.out.println(currentBoard.toString(false));
-					System.out.println(currentFoeBoard.toString(true));
-				}
-			}				
-				
 			
-			
+			(currentPlayer.equals(player1) ? boardPlayer2 : boardPlayer1).hit(location);
+			turn++;
+			System.out.println(currentPlayer.getNickname());
+			System.out.println();
+			System.out.println(currentBoard.toString(false));
+			System.out.println(currentFoeBoard.toString(true));			
 		}
 		System.out.println(tuple.getSecondElement() + " a perdu la partie");
 		scan.close();
@@ -115,57 +104,77 @@ public class Game {
 	 */
 	public void init(Scanner scan) {
 		
-		loop:
 		while (turn != 10){
 			Player currentPlayer = (turn%2 == 0 ? player1 : player2);
 			Board currentBoard = (turn%2 == 0 ? boardPlayer1 : boardPlayer2);
 			List<Boat> currentList = (turn%2 == 0 ? player1Boats : player2Boats);
+			
+			System.out.println(currentPlayer.getNickname() + " joue.");
+			
 			System.out.println("Ligne où poser le bateau");
 			int row = scan.nextInt();
 			System.out.println("Colonne où poser le bateau");
 			int col = scan.nextInt();
+			String dummy = scan.nextLine();
 			Location location;
-			if(col > -1 && col < currentBoard.getColumns() && row > -1 && row < currentBoard.getRows())
+			if (col > -1 && col < currentBoard.getColumns() && row > -1
+					&& row < currentBoard.getRows())
 				location = new Location(row, col);
-			else{
+			else {
 				System.out.println("Position en dehors du tableau");
 				continue;
 			}
+
 			System.out.println("Direction du bateau {NS, SN, WE, EW}");
 			Direction direction;
-			try{
-				direction = Direction.valueOf(scan.next().toUpperCase());
-			}catch(IllegalArgumentException e){System.out.println("Mauvaise direction"); continue;};
-			
-			System.out.println("Type de bateau {Aircraft, BattleShip, Cruiser, Destroyer, Submarine}");
-			
-			String type = scan.next();
-			
-			Boat boat;
-			
-			switch(type.toLowerCase()){
-			case "destroyer" : boat = new Destroyer(); break;
-			case "cruiser" : boat = new Cruiser(); break;
-			case "aircraft" : boat = new AircraftCarrier(); break;
-			case "submarine" : boat = new Submarine(); break;
-			case "battleship" : boat = new Battleship(); break;
-			default : System.out.println("Mauvais choix de bateau"); continue;
+			try {
+				direction = Direction.valueOf(scan.nextLine().toUpperCase().trim());
+			} catch (IllegalArgumentException e) {
+				System.out.println("Mauvaise direction");
+				continue;
 			}
 			
+			System.out
+					.println("Type de bateau {Aircraft, BattleShip, Cruiser, Destroyer, Submarine}");
+			String type = scan.nextLine();
+			Boat boat;
+
+			switch (type.toLowerCase().trim()) {
+			case "destroyer":
+				boat = new Destroyer();
+				break;
+			case "cruiser":
+				boat = new Cruiser();
+				break;
+			case "aircraft":
+				boat = new AircraftCarrier();
+				break;
+			case "submarine":
+				boat = new Submarine();
+				break;
+			case "battleship":
+				boat = new Battleship();
+				break;
+			default:
+				System.err.println("Mauvais choix de bateau");
+				continue;
+			}
+			
+			boolean validBoats = true;
 			for(Boat b : currentList){
 				if(b.getClass().getName().equalsIgnoreCase(boat.getClass().getName())){
-					System.out.println("Le bateau de ce type est déjà présent sur le plateau");
-					continue loop;
-				}
-					
+					System.err.println("Le bateau de ce type est déjà présent sur le plateau");
+					validBoats = false;
+					break;
+				}	
 			}
+			if (!validBoats) continue;
 			
 			// TODO Ne doit pas créer de bateaux sur d'autres bateaux => à faire dans Board.createBoat
 			
 			if(currentBoard.createBoat(direction, location,(Boat) boat)){
 				turn++;
 				currentList.add(boat);
-				System.out.println(currentPlayer.getNickname());
 				System.out.println(currentBoard.toString(false));
 			}
 			
@@ -181,14 +190,12 @@ public class Game {
 		Tuple<Boolean, String> tuple = new Tuple<Boolean, String>(false, "");
 		
 		boolean b1 = false;
-		
 		for(Boat boat : player1Boats){
 			if(!boat.isSinked())
 				b1 = true;
 		}
 		
-		boolean b2 = false;
-		
+		boolean b2 = false;	
 		for(Boat boat : player2Boats){
 			if(!boat.isSinked())
 				b2 = true;

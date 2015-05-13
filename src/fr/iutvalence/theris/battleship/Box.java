@@ -46,7 +46,6 @@ public class Box {
 		return boat;
 	}
 
-
 	/**
 	 * @param boat
 	 * Place un bateau sur la case

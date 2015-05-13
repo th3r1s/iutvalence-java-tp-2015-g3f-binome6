@@ -60,37 +60,51 @@ public class Board {
 	 * @param direction
 	 * @param location
 	 * @param boat
-	 * @return
-	 * Permet de créer un bateau et de le placer sur le plateau
+	 * @return Permet de créer un bateau et de le placer sur le plateau Vérifie
+	 *         si il n'y a pas de chevauchement de bateau
 	 */
-	public boolean createBoat(Direction direction, Location location, Boat boat){
+	public boolean createBoat(Direction direction, Location location, Boat boat) {
 		Box[] relativesBoxes = boat.getRelativesBoxes();
 		relativesBoxes[0] = getBox(location);
-		relativesBoxes[0].setBoat(boat);
-		try{
-		for(int i=1;i<boat.getSize();i++){
-			relativesBoxes[i] = getNextBox(direction, relativesBoxes[i-1]);
-			if(relativesBoxes[i].getBoat()!=null){
-				{System.out.println("Erreur : un bateau est déjà placé ici");
-					}
-					return false;
-			}
-			relativesBoxes[i].setBoat(boat);
+		boolean verif = false;
+		for (int i = 1; i < boat.getSize(); i++) {
+			relativesBoxes[i] = getNextBox(direction, relativesBoxes[i - 1]);
 		}
-		}catch(ArrayIndexOutOfBoundsException out)
-		{System.out.println("Erreur : le bateau ne rentre pas dans le tableau");
-		for(int i=0;i<boat.getSize();i++){
-			if(relativesBoxes[i] == null)
+		int i = 0;
+		while (i < boat.getSize()) {
+			if (relativesBoxes[i].getBoat() != null) {
+				i++;
+			} else {
+				verif = true;
+				System.err
+						.println("Erreur : il y a un chevauchement de bateaux");
 				break;
-			relativesBoxes[i].setBoat(null);
 			}
+		}
+		if (!verif) {
+			try {
+				relativesBoxes[0].setBoat(boat);
+				for (i = 1; i < boat.getSize(); i++) {
+					relativesBoxes[i] = getNextBox(direction,
+							relativesBoxes[i - 1]);
+					relativesBoxes[i].setBoat(boat);
+				}
+			} catch (ArrayIndexOutOfBoundsException out) {
+				System.out
+						.println("Erreur : le bateau ne rentre pas dans le tableau");
+				for (i = 0; i < boat.getSize(); i++) {
+					if (relativesBoxes[i] == null)
+						break;
+					relativesBoxes[i].setBoat(null);
+				}
+				return false;
+			}
+			return true;
+		} else {
 			return false;
 		}
-		return true;
-		
 	}
-	
-	
+
 	/**
 	 * @param direction
 	 * @param firstBox
