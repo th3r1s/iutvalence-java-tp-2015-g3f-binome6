@@ -13,24 +13,24 @@ import fr.iutvalence.theris.battleship.boats.Boat;
 public class Box {
 
 	/**
-	 * Position d'une case
+	 * box location.
 	 */
 	private final Location location;
 	
 	/**
-	 * Case touchée ?
+	 * hitted box ?
 	 */
 	private boolean hitted;
 	
 	/**
-	 * Si un bateau est posé sur la case
+	 * a local boat if there is.
 	 */
 	private Boat boat;
 
 
 	/**
-	 * @param location
-	 * Créer une case selon une position
+	 * create a box according to a location.
+	 * @param location where we want to create a box
 	 */
 	public Box(Location location) {
 		this.location = location;
@@ -39,16 +39,16 @@ public class Box {
 
 
 	/**
-	 * @return
-	 * Récupère le bateau qui est sur la case
+	 * give the boat.
+	 * @return the  boat
 	 */
 	public Boat getBoat() {
 		return boat;
 	}
 
 	/**
+	 * set a local boat.
 	 * @param boat
-	 * Place un bateau sur la case
 	 */
 	public void setBoat(Boat boat) {
 		this.boat = boat;
@@ -56,8 +56,8 @@ public class Box {
 
 
 	/**
-	 * @return
-	 * Donne la position de la case
+	 * give the location.
+	 * @return the location.
 	 */
 	public Location getLocation() {
 		return location;
@@ -66,8 +66,8 @@ public class Box {
 	
 	
 	/**
-	 * @return
-	 * Dis si la case est touchée
+	 * box hitted ?
+	 * @return hitted
 	 */
 	public boolean isHitted() {
 		return hitted;
@@ -75,7 +75,7 @@ public class Box {
 
 
 	/**
-	 * Touche la case et le bateau dessus si il existe
+	 * hit the box and the boat if it exists.
 	 */
 	public void hit() {
 		this.hitted = true;
@@ -85,9 +85,9 @@ public class Box {
 
 
 	/**
-	 * @param foe
-	 * @return
-	 * toString d'une case. Foe permet de gérer l'affichage entre les deux plateaux
+	 * box toString. Foe allow to differentiate the player's box and the foe's box.
+	 * @param foe : for the foe's box
+	 * @return toString
 	 */
 	public String toString(boolean foe){
 		if(this.boat != null){

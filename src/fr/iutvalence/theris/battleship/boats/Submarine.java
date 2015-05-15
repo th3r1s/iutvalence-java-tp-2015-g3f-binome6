@@ -2,12 +2,12 @@ package fr.iutvalence.theris.battleship.boats;
 
 /**
  * @author Robin
- * Sous-Marin
+ * submarine.
  */
 public class Submarine extends Boat {
 
 	/**
-	 * Constructeur d'un sous-marin
+	 * submarine constructor.
 	 */
 	public Submarine() {
 		super(BoatSizes.SUBMARINE.getSize());

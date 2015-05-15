@@ -3,31 +3,31 @@ package fr.iutvalence.theris.battleship.boats;
 import fr.iutvalence.theris.battleship.Box;
 
 /**
+ * boat class which is derived boats.
  * @author Robin
- *Classe bateau dont est issus les bateaux
  */
 public abstract class Boat {
 	
 	/**
-	 * Taille d'un bateau
+	 * boat size.
 	 */
 	private final int size;
 	
 	/**
-	 * Vie d'un bateau
+	 * boat life.
 	 */
 	private int life;
 	
 	/**
-	 * liste des cases relatives au bateau
+	 * relatives boxes list.
 	 */
 	private final Box[] relativesBoxes;
 
 	/**
-	 * @param size
-	 * @param direction
-	 * @param relativesBoxes
-	 * Créer une bateau (constructeur)
+	 * boat constructor.
+	 * @param size of the ship
+	 * @param direction wanted
+	 * @param relativesBoxes of the ship
 	 */
 	public Boat(int size){
 		this.size = size;
@@ -36,31 +36,31 @@ public abstract class Boat {
 	}
 
 	/**
-	 * @return
-	 * Donne la taille du bateau
+	 * give the boat's size.
+	 * @return wanted size
 	 */
 	public int getSize() {
 		return size;
 	}
 
 	/**
-	 * Le bateau est touché et perd de la vie
+	 * Boat is hitted and loses life.
 	 */
 	public void isHitted() {
 		this.life--;
 	}
 	
 	/**
-	 * @return
-	 * Le bateau est coulé car il n'a plus de vie
+	 * the ship is sinked because it doesn't have any life.
+	 * @return boolean : is sinked ?
 	 */
 	public boolean isSinked() {
 		return(life==0 ? true : false);
 	}
 
 	/**
-	 * @return
-	 * donne la liste des cases relatives au bateau
+	 * give the relatives boxes list.
+	 * @return wanted relatives boxes list
 	 */
 	public Box[] getRelativesBoxes() {
 		return relativesBoxes;

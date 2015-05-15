@@ -2,12 +2,12 @@ package fr.iutvalence.theris.battleship;
 
 /**
  * @author Robin
- * main de la bataille navale. Permet de créer une partie (game)
+ * battleship main
  */
 public class BattleShip {
 	
 	/**
-	 * Partie du jeu
+	 * the futur game.
 	 */
 	private static Game game;
 	

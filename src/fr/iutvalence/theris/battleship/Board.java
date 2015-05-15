@@ -4,37 +4,37 @@ import fr.iutvalence.theris.battleship.boats.Boat;
 
 /**
  * @author Robin
- * Plateau
+ * board.
  */
 public class Board {
 
 	/**
-	 * Nombre de ligne standard d'un plateau
+	 * default number of board's rows.
 	 */
 	private static final int NB_ROWS = 10;
 	/**
-	 * Nombre de colonnes standard d'un plateau
+	 * default number of board's columns.
 	 */
 	private static final int NB_COLUMNS = 10;
 	
 	/**
-	 *  Nombre de ligne d'un plateau
+	 * number of board's rows.
 	 */
 	private final int rows;
 	/**
-	 * Nombre de colonnes d'un plateau
+	 * number of board's columns.
 	 */
 	private final int columns;
 	
 	/**
-	 * Tableau de cases composants le plateau
+	 * box table of the board.
 	 */
 	private final Box box[][];
 	
 	/**
+	 * board builder.
 	 * @param rows
 	 * @param columns
-	 * Constructeur d'une plateau
 	 */
 	public Board(int rows, int columns) {
 		this.rows=columns;
@@ -50,18 +50,18 @@ public class Board {
 	}
 	
 	/**
-	 * Permet de créer le plateau
+	 * allow to create a board.
 	 */
 	public Board() {
 		this(NB_ROWS, NB_COLUMNS);
 	}
 	
 	/**
-	 * @param direction
-	 * @param location
-	 * @param boat
-	 * @return Permet de créer un bateau et de le placer sur le plateau Vérifie
-	 *         si il n'y a pas de chevauchement de bateau
+	 * allow to create a boat and to put it on the board. Check if there is no boats overlap.
+	 * @param direction of the added boat
+	 * @param location of the added boat
+	 * @param boat : type of the added boat
+	 * @return 
 	 */
 	public boolean createBoat(Direction direction, Location location, Boat boat) {
 		Box[] relativesBoxes = boat.getRelativesBoxes();
@@ -72,12 +72,11 @@ public class Board {
 		}
 		int i = 0;
 		while (i < boat.getSize()) {
-			if (relativesBoxes[i].getBoat() != null) {
+			if (relativesBoxes[i].getBoat() == null) {
 				i++;
 			} else {
 				verif = true;
-				System.err
-						.println("Erreur : il y a un chevauchement de bateaux");
+				System.err.println("Erreur : il y a un chevauchement de bateaux");
 				break;
 			}
 		}
@@ -90,8 +89,7 @@ public class Board {
 					relativesBoxes[i].setBoat(boat);
 				}
 			} catch (ArrayIndexOutOfBoundsException out) {
-				System.out
-						.println("Erreur : le bateau ne rentre pas dans le tableau");
+				System.out.println("Erreur : le bateau ne rentre pas dans le tableau");
 				for (i = 0; i < boat.getSize(); i++) {
 					if (relativesBoxes[i] == null)
 						break;
@@ -106,10 +104,10 @@ public class Board {
 	}
 
 	/**
-	 * @param direction
-	 * @param firstBox
+	 * method allowing to get the next box according to the direction.
+	 * @param direction allowing to know which box we want to get
+	 * @param firstBox : the box from the method is used
 	 * @return
-	 * Methode permettant d'avoir la case suivante selon la direction
 	 */
 	private Box getNextBox(Direction direction, Box firstBox){
 		switch(direction){
@@ -123,71 +121,71 @@ public class Board {
 	}
 	
 	/**
-	 * @param row
-	 * @param column
-	 * @return
-	 * Permet de récupérer une case selon une ligne et une colonne
+	 * allow to get a box according to a row and a column.
+	 * @param row of the box
+	 * @param column of the box
+	 * @return the box we need to get
 	 */
 	public Box getBox(int row, int column){
 		return this.box[row][column];
 	}
 
 	/**
-	 * @param location
-	 * @return
-	 * Permet de récupérer une case selon un emplacement
+	 * allow to get a box according to a location.
+	 * @param location of the box
+	 * @return the box we need to get
 	 */
 	public Box getBox(Location location){
 		return getBox(location.getRow(), location.getColumn());
 	}
 	
 	/**
-	 * @param location
-	 * @return
-	 * Permet de récupérer la case inférieure à l'emplacement donné
+	 * allow to get the bottom box of the location.
+	 * @param location from the method is used
+	 * @return the box we need to get
 	 */
 	public Box getBottomBox(Location location){
 		return this.box[location.getRow()+1][location.getColumn()];
 	}
 	
 	/**
-	 * @param location
-	 * @return
-	 * Permet de récupérer la case supérieure à l'emplacement donné
+	 * allow to get the upper box of the location.
+	 * @param location from the method is used
+	 * @return the box we need to get
 	 */
 	public Box getUpperBox(Location location){
 		return this.box[location.getRow()-1][location.getColumn()];
 	}
 	
 	/**
-	 * @param location
-	 * @return
-	 * Permet de récupérer la case à gauche de l'emplacement donné
+	 * allow to get the left box of the location.
+	 * @param location from the method is used
+	 * @return the box we need to get
 	 */
 	public Box getLeftBox(Location location){
 		return this.box[location.getRow()][location.getColumn()-1];
 	}
 	
 	/**
-	 * @param location
-	 * @return
-	 * Permet de récupérer la case inférieure à l'emplacement donné
+	 * allow to get the right box of the location.
+	 * @param location from the method is used
+	 * @return the box we need to get
 	 */
 	public Box getRightBox(Location location){
 		return this.box[location.getRow()][location.getColumn()+1];
 	}
 	
 	/**
-	 * @return
-	 * Permet de récupérer les lignes
+	 * allow to get rows.
+	 * @return row
 	 */
 	public int getRows() {
 		return rows;
 	}
 
 	/**
-	 * @return
-	 * Permet de récupérer les colonnes
+	 * allow to get columns.
+	 * @return column
 	 */
 	public int getColumns() {
 		return columns;
@@ -195,9 +193,9 @@ public class Board {
 	
 	
 	/**
-	 * @param position
-	 * @return
-	 * Touche une case sauf si le tir n'est pas dans le plateau
+	 * hit a box except if the hit is not on the board.
+	 * @param position where we want to hit
+	 * @return boolean : hit / not hit
 	 */
 	public boolean hit(Location position) {
 		try{
@@ -211,9 +209,9 @@ public class Board {
 	}
 	
 	/**
-	 * @param foe
-	 * @return
-	 * toString d'un plateau. Foe permet de gérer l'affichage entre les deux plateaux
+	 * board toString. Foe allow to differentiate the player's board and the foe's board.
+	 * @param foe : for the foe's board
+	 * @return str : local variable with the string
 	 */
 	public String toString(boolean foe){
 		String str = "";

@@ -4,7 +4,6 @@ package fr.iutvalence.theris.battleship;
  * @author Robin
  * @param <A> 
  * @param <B>
- * classe paramétrée afin de gérer les pertes de parties
  */
 public class Tuple<A, B> {
 
@@ -14,7 +13,6 @@ public class Tuple<A, B> {
 	/**
 	 * @param firstElement
 	 * @param secondElement
-	 * constructeur
 	 */
 	public Tuple(A firstElement, B secondElement) {
 		this.firstElement = firstElement;
@@ -23,7 +21,6 @@ public class Tuple<A, B> {
 
 	/**
 	 * @return
-	 * setter du premier element
 	 */
 	public A getFirstElement() {
 		return firstElement;
@@ -31,7 +28,6 @@ public class Tuple<A, B> {
 
 	/**
 	 * @param firstElement
-	 * setter du premier element
 	 */
 	public void setFirstElement(A firstElement) {
 		this.firstElement = firstElement;
@@ -39,7 +35,6 @@ public class Tuple<A, B> {
 
 	/**
 	 * @return
-	 * getter du deuxieme element
 	 */
 	public B getSecondElement() {
 		return secondElement;
@@ -47,7 +42,6 @@ public class Tuple<A, B> {
 
 	/**
 	 * @param secondElement
-	 * setter du deuxieme element
 	 */
 	public void setSecondElement(B secondElement) {
 		this.secondElement = secondElement;

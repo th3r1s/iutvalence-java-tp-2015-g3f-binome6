@@ -1,5 +1,5 @@
 /**
  * @author robinvi
- * Bataille navale : package concernant les bateaux
+ * Battleship : boat package.
  */
 package fr.iutvalence.theris.battleship.boats;

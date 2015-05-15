@@ -2,7 +2,7 @@ package fr.iutvalence.theris.battleship.boats;
 
 /**
  * @author Robin
- * Enumeration des différentes tailles des différents bateaux
+ * enum of the different sizes of the different ships.
  */
 public enum BoatSizes {
 
@@ -13,21 +13,21 @@ public enum BoatSizes {
 	AIRCRAFTCARRIER(5);
 	
 	/**
-	 * taille d'un bateau
+	 * boat size.
 	 */
 	private final int size;
 	
 	/**
-	 * @param size
-	 * défini le bateau selon sa taille
+	 * link a size with a ship.
+	 * @param size of the ship
 	 */
 	private BoatSizes(int size){
 		this.size = size;
 	}
 
 	/**
-	 * @return
-	 * donne la taille d'un type de bateau
+	 * give the size of a boat type.
+	 * @return the wanted size.
 	 */
 	public int getSize() {
 		return size;

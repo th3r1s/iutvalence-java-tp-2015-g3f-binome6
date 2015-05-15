@@ -2,12 +2,12 @@ package fr.iutvalence.theris.battleship.boats;
 
 /**
  * @author Robin
- * Porte-Avion
+ * Aircraft-Carrier.
  */
 public class AircraftCarrier extends Boat {
 
 	/**
-	 * Constructeur d'un porte-avion
+	 * aircraft-carrier constructor.
 	 */
 	public AircraftCarrier() {
 		super(BoatSizes.AIRCRAFTCARRIER.getSize());

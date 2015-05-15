@@ -7,18 +7,18 @@ package fr.iutvalence.theris.battleship;
 public class Location {
 
 	/**
-	 * ligne de la position
+	 * position's row.
 	 */
 	private final int row;
 	/**
-	 * colonne de la postion
+	 * position's column.
 	 */
 	private final int column;
 	
 	/**
+	 * create a location.
 	 * @param row
 	 * @param column
-	 * créer une position
 	 */
 	public Location(int row, int column) {
 		this.row=row;
@@ -26,16 +26,16 @@ public class Location {
 	}
 
 	/**
-	 * @return
-	 * donne la ligne de la position
+	 * give the position's row.
+	 * @return wanted row
 	 */
 	public int getRow() {
 		return row;
 	}
 
 	/**
-	 * @return
-	 * donne la colonne de la position
+	 * give the postion's column.
+	 * @return wanted column
 	 */
 	public int getColumn() {
 		return column;

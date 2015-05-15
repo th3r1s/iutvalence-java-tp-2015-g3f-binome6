@@ -2,12 +2,12 @@ package fr.iutvalence.theris.battleship.boats;
 
 /**
  * @author Robin
- * Destroyer
+ * Destroyer.
  */
 public class Destroyer extends Boat {
 
 	/**
-	 * Constructeur d'un destroyer
+	 * destroyer constructor.
 	 */
 	public Destroyer() {
 		super(BoatSizes.DESTROYER.getSize());

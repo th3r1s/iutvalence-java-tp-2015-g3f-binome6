@@ -13,32 +13,32 @@ import fr.iutvalence.theris.battleship.boats.Submarine;
 
 /**
  * @author Robin
- * Une partie
+ * A game.
  */
 public class Game {
 
 	/**
-	 * Plateau du joueur 1
+	 * Player1's board.
 	 */
 	private Board boardPlayer1;
 	
 	/**
-	 * Plateau du joueur 2
+	 * player2's board.
 	 */
 	private Board boardPlayer2;
 	
 	/**
-	 * Joueur 1
+	 * first player.
 	 */
 	private Player player1;
 	
 	/**
-	 * Joueur 2
+	 * second player.
 	 */
 	private Player player2;
 	
 	/**
-	 * Nombre de tours, permet de savoir qui doit jouer
+	 * number of turns, allow to know who plays.
 	 */
 	private int turn;
 	
@@ -46,10 +46,9 @@ public class Game {
 	private List<Boat> player2Boats;
 	
 	/**
-	 * Constructeur d'une partie.
-	 * 
-	 * @param player1 TODO
-	 * @param player2 TODO2
+	 * game constructor.
+	 * @param player1 first player of the game
+	 * @param player2 second player of the game
 	 */
 	public Game(Player player1, Player player2) {
 		this.player1 = player1;
@@ -65,7 +64,7 @@ public class Game {
 	}
 	
 	/**
-	 * Méthode d'une partie jouée
+	 * played game method.
 	 */
 	public void play(){
 		Scanner scan  = new Scanner(System.in);
@@ -100,7 +99,7 @@ public class Game {
 	}
 
 	/**
-	 * Initialisation d'une partie : pose des bateaux
+	 * played game initialisation method : put players boats on board.
 	 */
 	public void init(Scanner scan) {
 		
@@ -170,8 +169,6 @@ public class Game {
 			}
 			if (!validBoats) continue;
 			
-			// TODO Ne doit pas créer de bateaux sur d'autres bateaux => à faire dans Board.createBoat
-			
 			if(currentBoard.createBoat(direction, location,(Boat) boat)){
 				turn++;
 				currentList.add(boat);
@@ -182,8 +179,8 @@ public class Game {
 	}
 	
 	/**
-	 * @return
-	 * Fin d'une partie
+	 * end of a played game.
+	 * @return a boolean allowing to stop the played game loop
 	 */
 	public Tuple<Boolean, String> end(){
 		

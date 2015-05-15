@@ -2,12 +2,12 @@ package fr.iutvalence.theris.battleship.boats;
 
 /**
  * @author Robin
- * Cruiser
+ * Cruiser.
  */
 public class Cruiser extends Boat {
 
 	/**
-	 * Constructeur d'un cruiser
+	 * cruiser constructor.
 	 */
 	public Cruiser() {
 		super(BoatSizes.CRUISER.getSize());

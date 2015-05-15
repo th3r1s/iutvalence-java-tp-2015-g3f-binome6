@@ -1,5 +1,5 @@
 /**
  * @author robinvi
- * Bataille navale : package general du jeu
+ * Battleship main package.
  */
 package fr.iutvalence.theris.battleship;
