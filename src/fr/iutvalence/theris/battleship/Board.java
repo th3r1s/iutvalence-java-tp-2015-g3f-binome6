@@ -67,13 +67,20 @@ public class Board {
 		Box[] relativesBoxes = boat.getRelativesBoxes();
 		relativesBoxes[0] = getBox(location);
 		boolean verif = false;
+		try {
 		for (int i = 1; i < boat.getSize(); i++) {
 			relativesBoxes[i] = getNextBox(direction, relativesBoxes[i - 1]);
 		}
+		} catch (ArrayIndexOutOfBoundsException out) {
+			System.out.println("Erreur : le bateau ne rentre pas dans le tableau");
+			return false;
+		}
 		int i = 0;
 		while (i < boat.getSize()) {
+
 			if (relativesBoxes[i].getBoat() == null) {
 				i++;
+
 			} else {
 				verif = true;
 				System.err.println("Erreur : il y a un chevauchement de bateaux");
@@ -81,22 +88,11 @@ public class Board {
 			}
 		}
 		if (!verif) {
-			try {
-				relativesBoxes[0].setBoat(boat);
-				for (i = 1; i < boat.getSize(); i++) {
-					relativesBoxes[i] = getNextBox(direction,
-							relativesBoxes[i - 1]);
+
+				for (i = 0; i < boat.getSize(); i++) {
 					relativesBoxes[i].setBoat(boat);
 				}
-			} catch (ArrayIndexOutOfBoundsException out) {
-				System.out.println("Erreur : le bateau ne rentre pas dans le tableau");
-				for (i = 0; i < boat.getSize(); i++) {
-					if (relativesBoxes[i] == null)
-						break;
-					relativesBoxes[i].setBoat(null);
-				}
-				return false;
-			}
+
 			return true;
 		} else {
 			return false;
