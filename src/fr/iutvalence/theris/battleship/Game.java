@@ -87,7 +87,13 @@ public class Game {
 				continue;
 			}
 			
-			(currentPlayer.equals(player1) ? boardPlayer2 : boardPlayer1).hit(location);
+			if(!(currentPlayer.equals(player1) ? boardPlayer2 : boardPlayer1).getBox(location).isHitted()){
+				(currentPlayer.equals(player1) ? boardPlayer2 : boardPlayer1).hit(location);
+			}
+			else{
+				System.err.println("Vous avez déjà tiré ici");
+				continue;
+			}
 			turn++;
 			System.out.println(currentPlayer.getNickname());
 			System.out.println();
@@ -97,9 +103,8 @@ public class Game {
 		System.out.println(tuple.getSecondElement() + " a perdu la partie");
 		scan.close();
 	}
-
 	/**
-	 * played game initialisation method : put players boats on board.
+	 * played game initialization method : put player's boats on board.
 	 */
 	public void init(Scanner scan) {
 		

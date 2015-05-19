@@ -65,5 +65,9 @@ public abstract class Boat {
 	public Box[] getRelativesBoxes() {
 		return relativesBoxes;
 	}
+	
+	public int getLife(){
+		return life;
+	}
 
 }

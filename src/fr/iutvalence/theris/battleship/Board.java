@@ -205,21 +205,23 @@ public class Board {
 	}
 	
 	/**
+	 * Method: To display on the console a grid with its cases states
 	 * board toString. Foe allow to differentiate the player's board and the foe's board.
 	 * @param foe : for the foe's board
 	 * @return str : local variable with the string
 	 */
-	public String toString(boolean foe){
-		String str = "";
-		for(int nbRow = 0; nbRow<rows;nbRow++){
-			str += "\n";
-			for(int nbCol = 0;nbCol<columns;nbCol++){
-				str += this.box[nbRow][nbCol].toString(foe);
-			}
-		}
-		
-		return str;
-	}
-	
+    public String toString(boolean foe)
+    {
+            String str = "---------------------------------------------\n|   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |\n---------------------------------------------\n";
+            for (int rows = 0; rows<NB_ROWS;rows++)						
+            {
+            	str += "| "+rows+" ";
+                    for (int columns = 0; columns<NB_COLUMNS;columns++)
+                    	str += this.box[rows][columns].toString(foe);
+                    str += "|\n---------------------------------------------\n";
+            }
+            return str;
+    }
+    
 	
 }
