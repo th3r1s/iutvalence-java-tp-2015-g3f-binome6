@@ -1,6 +1,6 @@
-package fr.iutvalence.theris.battleship;
+package fr.iutvalence.theris.battleship.model;
 
-import fr.iutvalence.theris.battleship.boats.Boat;
+import fr.iutvalence.theris.battleship.model.boats.Boat;
 
 /**
  * @author Robin

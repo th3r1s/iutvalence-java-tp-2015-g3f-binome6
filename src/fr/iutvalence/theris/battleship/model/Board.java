@@ -1,6 +1,6 @@
-package fr.iutvalence.theris.battleship;
+package fr.iutvalence.theris.battleship.model;
 
-import fr.iutvalence.theris.battleship.boats.Boat;
+import fr.iutvalence.theris.battleship.model.boats.Boat;
 
 /**
  * @author Robin
@@ -72,7 +72,7 @@ public class Board {
 			relativesBoxes[i] = getNextBox(direction, relativesBoxes[i - 1]);
 		}
 		} catch (ArrayIndexOutOfBoundsException out) {
-			System.out.println("Erreur : le bateau ne rentre pas dans le tableau");
+			System.err.println("Error : the boat doesn't fit on the board.");
 			return false;
 		}
 		int i = 0;
@@ -83,7 +83,7 @@ public class Board {
 
 			} else {
 				verif = true;
-				System.err.println("Erreur : il y a un chevauchement de bateaux");
+				System.err.println("Error : there is a overlap of boats.");
 				break;
 			}
 		}
@@ -198,7 +198,7 @@ public class Board {
 		getBox(position).hit();
 		return true;}
 		catch(ArrayIndexOutOfBoundsException out){
-			System.out.println("Erreur : le tir ne rentre pas dans le tableau");
+			System.out.println("Error : the hit doesn't fit on the board.");
 			return false;
 		}
 		

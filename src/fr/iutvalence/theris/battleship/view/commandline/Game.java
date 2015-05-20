@@ -1,15 +1,19 @@
-package fr.iutvalence.theris.battleship;
+package fr.iutvalence.theris.battleship.view.commandline;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import fr.iutvalence.theris.battleship.boats.AircraftCarrier;
-import fr.iutvalence.theris.battleship.boats.Battleship;
-import fr.iutvalence.theris.battleship.boats.Boat;
-import fr.iutvalence.theris.battleship.boats.Cruiser;
-import fr.iutvalence.theris.battleship.boats.Destroyer;
-import fr.iutvalence.theris.battleship.boats.Submarine;
+import fr.iutvalence.theris.battleship.model.Board;
+import fr.iutvalence.theris.battleship.model.Direction;
+import fr.iutvalence.theris.battleship.model.Location;
+import fr.iutvalence.theris.battleship.model.Player;
+import fr.iutvalence.theris.battleship.model.boats.AircraftCarrier;
+import fr.iutvalence.theris.battleship.model.boats.Battleship;
+import fr.iutvalence.theris.battleship.model.boats.Boat;
+import fr.iutvalence.theris.battleship.model.boats.Cruiser;
+import fr.iutvalence.theris.battleship.model.boats.Destroyer;
+import fr.iutvalence.theris.battleship.model.boats.Submarine;
 
 /**
  * @author Robin
@@ -75,15 +79,15 @@ public class Game {
 			Board currentBoard = (turn%2 == 0 ? boardPlayer1 : boardPlayer2);
 			Board currentFoeBoard = (turn%2 == 1 ? boardPlayer1 : boardPlayer2);
 			
-			System.out.println("Sur quelle ligne tirer");
+			System.out.println("On what line do you want to hit?");
 			int row = scan.nextInt();
-			System.out.println("Sur quelle colonne tirer ?");
+			System.out.println("On what column do you want to hit?");
 			int col = scan.nextInt();
 			Location location;
 			if(col > -1 && col < currentBoard.getColumns() && row > -1 && row < currentBoard.getRows())
 				location = new Location(row, col);
 			else{
-				System.out.println("Position en dehors du tableau");
+				System.err.println("Location doesn't fit on board");
 				continue;
 			}
 			
@@ -91,7 +95,7 @@ public class Game {
 				(currentPlayer.equals(player1) ? boardPlayer2 : boardPlayer1).hit(location);
 			}
 			else{
-				System.err.println("Vous avez déjà tiré ici");
+				System.err.println("You have already hit this location.");
 				continue;
 			}
 			turn++;
@@ -100,7 +104,7 @@ public class Game {
 			System.out.println(currentBoard.toString(false));
 			System.out.println(currentFoeBoard.toString(true));			
 		}
-		System.out.println(tuple.getSecondElement() + " a perdu la partie");
+		System.out.println(tuple.getSecondElement() + " lose the game.");
 		scan.close();
 	}
 	/**
@@ -113,11 +117,11 @@ public class Game {
 			Board currentBoard = (turn%2 == 0 ? boardPlayer1 : boardPlayer2);
 			List<Boat> currentList = (turn%2 == 0 ? player1Boats : player2Boats);
 			
-			System.out.println(currentPlayer.getNickname() + " joue.");
+			System.out.println(currentPlayer.getNickname() + "'s turn.");
 			
-			System.out.println("Ligne où poser le bateau");
+			System.out.println("On what line do you want to put your boat?");
 			int row = scan.nextInt();
-			System.out.println("Colonne où poser le bateau");
+			System.out.println("On what column do you want to put your boat?");
 			int col = scan.nextInt();
 			String dummy = scan.nextLine();
 			Location location;
@@ -125,21 +129,21 @@ public class Game {
 					&& row < currentBoard.getRows())
 				location = new Location(row, col);
 			else {
-				System.out.println("Position en dehors du tableau");
+				System.err.println("Location doesn't fit on board.");
 				continue;
 			}
 
-			System.out.println("Direction du bateau {NS, SN, WE, EW}");
+			System.out.println("Boat direction? {NS, SN, WE, EW}");
 			Direction direction;
 			try {
 				direction = Direction.valueOf(scan.nextLine().toUpperCase().trim());
 			} catch (IllegalArgumentException e) {
-				System.out.println("Mauvaise direction");
+				System.err.println("Wrong direction");
 				continue;
 			}
 			
 			System.out
-					.println("Type de bateau {Aircraft, BattleShip, Cruiser, Destroyer, Submarine}");
+					.println("Boat types? {Aircraft, BattleShip, Cruiser, Destroyer, Submarine}");
 			String type = scan.nextLine();
 			Boat boat;
 
@@ -160,14 +164,14 @@ public class Game {
 				boat = new Battleship();
 				break;
 			default:
-				System.err.println("Mauvais choix de bateau");
+				System.err.println("Wrong boat type.");
 				continue;
 			}
 			
 			boolean validBoats = true;
 			for(Boat b : currentList){
 				if(b.getClass().getName().equalsIgnoreCase(boat.getClass().getName())){
-					System.err.println("Le bateau de ce type est déjà présent sur le plateau");
+					System.err.println("You have already one boat of this type.");
 					validBoats = false;
 					break;
 				}	
@@ -206,9 +210,9 @@ public class Game {
 		if(!b1 || !b2){
 			tuple.setFirstElement(true);
 			if(b1)
-				tuple.setSecondElement("Joueur 2");
+				tuple.setSecondElement("Player 2");
 			if(b2)
-				tuple.setSecondElement("Joueur 1");
+				tuple.setSecondElement("Player 1");
 		}
 		return tuple;
 	}

@@ -1,6 +1,6 @@
-package fr.iutvalence.theris.battleship.boats;
+package fr.iutvalence.theris.battleship.model.boats;
 
-import fr.iutvalence.theris.battleship.Box;
+import fr.iutvalence.theris.battleship.model.Box;
 
 /**
  * boat class which is derived boats.
