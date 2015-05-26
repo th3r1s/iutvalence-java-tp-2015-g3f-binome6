@@ -2,7 +2,7 @@ package fr.iutvalence.theris.battleship;
 
 import javax.swing.SwingUtilities;
 
-import fr.iutvalence.theris.battleship.view.gui.BattleshipPannel;
+import fr.iutvalence.theris.battleship.view.gui.BattleshipPanel;
 
 /**
  * @author Robin
@@ -11,7 +11,7 @@ import fr.iutvalence.theris.battleship.view.gui.BattleshipPannel;
 public class BattleShip {
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new BattleshipPannel());
+		SwingUtilities.invokeLater(new BattleshipPanel());
 		
 		
 		
