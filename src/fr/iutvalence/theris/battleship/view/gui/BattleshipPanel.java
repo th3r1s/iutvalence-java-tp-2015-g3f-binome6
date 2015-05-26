@@ -1,6 +1,8 @@
 package fr.iutvalence.theris.battleship.view.gui;
 
 import java.awt.Image;
+
+import javax.security.auth.callback.LanguageCallback;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,18 +26,11 @@ public class BattleshipPanel implements Runnable {
 	/**
 	 * TODO Javadoc
 	 */
-	private JSplitPane launcher;
+	private Launcher launcher;
 	
 	/**
 	 * TODO Javadoc
 	 */
-	private JPanel init;
-	
-	/**
-	 * TODO Javadoc
-	 */
-	
-	private JPanel players;
 	
 	private JButton playButton;
 	
@@ -50,21 +45,18 @@ public class BattleshipPanel implements Runnable {
 		this.window = new JFrame("Test");
 		this.window.setVisible(true);
 
-		this.window.setSize(510, 510);
+		this.window.setSize(510, 175);
 		this.window.setTitle("Battleship");
 		this.window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		this.window.setJMenuBar(new BattleshipMenu(this.window));
-		players = new PlayerPanel();
-	    Border border = BorderFactory.createTitledBorder("Joueurs" );
-	    players.setBorder(border);
-	    
-		this.init = new JPanel();
-		init.add(players);
-		playButton = new JButton("Lancer la partie");
-		init.add(playButton);
-		window.add(init);
+		window.setLocationRelativeTo(null);
+		launcher = new Launcher(this);
+		window.setContentPane(launcher);
+
+	}
+	
+	public JFrame getWindow() {
+		return window;
 	}
 	
 }

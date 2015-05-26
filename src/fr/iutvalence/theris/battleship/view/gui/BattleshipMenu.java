@@ -4,13 +4,17 @@ package fr.iutvalence.theris.battleship.view.gui;
 //TODO Javadoc on this page
 
 
-import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
 public class BattleshipMenu extends JMenuBar {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JFrame window;
 	

@@ -21,10 +21,11 @@ public class PlayerEntry extends JSplitPane {
 	
 	private JTextField nickname = new JTextField("nickname");
 	
-	private JLabel label = new JLabel("Player 1 :");
+	private JLabel label;
 	
 	public PlayerEntry(int color) {
 		super(JSplitPane.HORIZONTAL_SPLIT);
+		label = new JLabel(String.format("Player %d :",color+1));
 		Font police = new Font("Arial", Font.BOLD, 14);
 		nickname.setFont(police);
 		nickname.setPreferredSize(new Dimension(150, 30));
