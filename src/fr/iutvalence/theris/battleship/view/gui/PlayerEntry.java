@@ -18,18 +18,17 @@ public class PlayerEntry extends JSplitPane {
 	/**
 	 * TODO Javadoc
 	 */
-	
 	private JTextField nickname = new JTextField("nickname");
 	
 	private JLabel label;
 	
-	public PlayerEntry(int color) {
+	public PlayerEntry(int player) {
 		super(JSplitPane.HORIZONTAL_SPLIT);
-		label = new JLabel(String.format("Player %d :",color+1));
+		label = new JLabel(String.format("Player %d :",player+1));
 		Font police = new Font("Arial", Font.BOLD, 14);
 		nickname.setFont(police);
 		nickname.setPreferredSize(new Dimension(150, 30));
-		if (color==0){
+		if (player==0){
 			nickname.setForeground(Color.BLUE);
 		}
 		else{
@@ -43,5 +42,8 @@ public class PlayerEntry extends JSplitPane {
 	    // Entre 0 et 1
 	    setResizeWeight(0.5);
 	}
-
+	
+	public String getNickName(){
+		return nickname.getText();
+	}
 }

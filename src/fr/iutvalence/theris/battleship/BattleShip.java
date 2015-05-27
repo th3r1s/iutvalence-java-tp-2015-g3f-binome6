@@ -1,8 +1,6 @@
 package fr.iutvalence.theris.battleship;
 
-import javax.swing.SwingUtilities;
-
-import fr.iutvalence.theris.battleship.view.gui.BattleshipPanel;
+import fr.iutvalence.theris.battleship.controller.Controller;
 
 /**
  * @author Robin
@@ -11,9 +9,8 @@ import fr.iutvalence.theris.battleship.view.gui.BattleshipPanel;
 public class BattleShip {
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new BattleshipPanel());
-		
-		
+
+		Controller controller = new Controller();
 		
 		/*	Scanner scan  = new Scanner(System.in);
 		System.out.println("Write the player1's name?");

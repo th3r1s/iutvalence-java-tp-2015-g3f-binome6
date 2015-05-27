@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import fr.iutvalence.theris.battleship.controller.Controller;
 import fr.iutvalence.theris.battleship.model.Board;
 import fr.iutvalence.theris.battleship.model.Direction;
 import fr.iutvalence.theris.battleship.model.Location;
@@ -14,6 +15,7 @@ import fr.iutvalence.theris.battleship.model.boats.Boat;
 import fr.iutvalence.theris.battleship.model.boats.Cruiser;
 import fr.iutvalence.theris.battleship.model.boats.Destroyer;
 import fr.iutvalence.theris.battleship.model.boats.Submarine;
+import fr.iutvalence.theris.battleship.view.Tuple;
 
 /**
  * @author Robin
@@ -54,12 +56,14 @@ public class Game {
 	 * @param player1 first player of the game
 	 * @param player2 second player of the game
 	 */
-	public Game(Player player1, Player player2) {
-		this.player1 = player1;
-		this.player2 = player2;
+	public Game(Controller controller) {
+		//controller.createNewGame();
 		
-		boardPlayer1 = new Board();
-		boardPlayer2 = new Board();
+		this.player1 = controller.getPlayer(1);
+		this.player2 = controller.getPlayer(2);
+		
+		boardPlayer1 = controller.getPlayerBoard(1);
+		boardPlayer2 = controller.getPlayerBoard(2);
 		
 		player1Boats = new ArrayList<Boat>();
 		player2Boats = new ArrayList<Boat>();
@@ -112,6 +116,9 @@ public class Game {
 	 */
 	public void init(Scanner scan) {
 		
+		
+		 // TODO Terminer cette classe
+		
 		while (turn != 10){
 			Player currentPlayer = (turn%2 == 0 ? player1 : player2);
 			Board currentBoard = (turn%2 == 0 ? boardPlayer1 : boardPlayer2);
@@ -124,23 +131,33 @@ public class Game {
 			System.out.println("On what column do you want to put your boat?");
 			int col = scan.nextInt();
 			String dummy = scan.nextLine();
-			Location location;
+			Tuple<Integer, Integer> location;
 			if (col > -1 && col < currentBoard.getColumns() && row > -1
-					&& row < currentBoard.getRows())
-				location = new Location(row, col);
+					&& row < currentBoard.getRows()){
+				location = new Tuple<Integer, Integer>(row, col);
+			}
 			else {
 				System.err.println("Location doesn't fit on board.");
 				continue;
 			}
 
 			System.out.println("Boat direction? {NS, SN, WE, EW}");
-			Direction direction;
-			try {
-				direction = Direction.valueOf(scan.nextLine().toUpperCase().trim());
-			} catch (IllegalArgumentException e) {
+			String direction;
+			String[] allDirections =  {"NS", "SN", "WE", "EW"};
+			
+			direction = scan.nextLine().toUpperCase().trim();
+			
+			boolean b = false;
+			for(int i=0;i<allDirections.length;i++){
+				if(allDirections[i].equals(direction))
+					b = true;
+			}
+			
+			if(!b){
 				System.err.println("Wrong direction");
 				continue;
 			}
+			
 			
 			System.out
 					.println("Boat types? {Aircraft, BattleShip, Cruiser, Destroyer, Submarine}");
@@ -169,8 +186,8 @@ public class Game {
 			}
 			
 			boolean validBoats = true;
-			for(Boat b : currentList){
-				if(b.getClass().getName().equalsIgnoreCase(boat.getClass().getName())){
+			for(Boat bo : currentList){
+				if(bo.getClass().getName().equalsIgnoreCase(boat.getClass().getName())){
 					System.err.println("You have already one boat of this type.");
 					validBoats = false;
 					break;
@@ -178,11 +195,11 @@ public class Game {
 			}
 			if (!validBoats) continue;
 			
-			if(currentBoard.createBoat(direction, location,(Boat) boat)){
-				turn++;
-				currentList.add(boat);
-				System.out.println(currentBoard.toString(false));
-			}
+//			if(currentBoard.createBoat(direction, location,(Boat) boat)){
+//				turn++;
+//				currentList.add(boat);
+//				System.out.println(currentBoard.toString(false));
+//			}
 			
 		}
 	}

@@ -14,9 +14,9 @@ public class PlayerPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JSplitPane player1;
+	private PlayerEntry player1;
 	
-	private JSplitPane player2;
+	private PlayerEntry player2;
 	
 	public PlayerPanel() {
 
@@ -31,5 +31,13 @@ public class PlayerPanel extends JPanel{
 	    Border border2 = BorderFactory.createLineBorder(Color.RED);
 	    player2.setBorder(border2);
 	}
+	
+	public PlayerEntry getPlayer1() {
+		return player1;
+	}
 
+	public PlayerEntry getPlayer2() {
+		return player2;
+	}
+	
 }

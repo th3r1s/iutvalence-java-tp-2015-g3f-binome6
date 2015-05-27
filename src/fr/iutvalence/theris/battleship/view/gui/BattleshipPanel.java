@@ -1,15 +1,8 @@
 package fr.iutvalence.theris.battleship.view.gui;
 
-import java.awt.Image;
-
-import javax.security.auth.callback.LanguageCallback;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.border.Border;
+
+import fr.iutvalence.theris.battleship.controller.Controller;
 
 /**
  * BattleShip's IHM converter. 
@@ -32,7 +25,11 @@ public class BattleshipPanel implements Runnable {
 	 * TODO Javadoc
 	 */
 	
-	private JButton playButton;
+	private Controller controller;
+	
+	public BattleshipPanel(Controller controller) {
+		this.controller = controller;
+	}
 	
 	public void run() {  
 		this.guiInitializer();
@@ -57,6 +54,10 @@ public class BattleshipPanel implements Runnable {
 	
 	public JFrame getWindow() {
 		return window;
+	}
+	
+	public Controller getController() {
+		return controller;
 	}
 	
 }

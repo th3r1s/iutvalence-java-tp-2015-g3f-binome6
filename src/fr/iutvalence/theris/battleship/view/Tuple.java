@@ -1,4 +1,4 @@
-package fr.iutvalence.theris.battleship.view.commandline;
+package fr.iutvalence.theris.battleship.view;
 
 /**
  * @author Robin
