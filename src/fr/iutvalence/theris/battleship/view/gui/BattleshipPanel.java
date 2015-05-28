@@ -39,7 +39,7 @@ public class BattleshipPanel implements Runnable {
 	 * TODO Javadoc
 	 */
 	private void guiInitializer(){
-		this.window = new JFrame("Test");
+		this.window = new JFrame();
 		this.window.setVisible(true);
 
 		this.window.setSize(510, 175);
@@ -60,4 +60,7 @@ public class BattleshipPanel implements Runnable {
 		return controller;
 	}
 	
+	public Launcher getLauncher() {
+		return launcher;
+	}
 }

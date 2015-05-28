@@ -9,6 +9,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 
+import fr.iutvalence.theris.battleship.view.gui.menuItems.About;
+import fr.iutvalence.theris.battleship.view.gui.menuItems.Close;
+
 public class BattleshipMenu extends JMenuBar {
 
 	/**
@@ -18,23 +21,21 @@ public class BattleshipMenu extends JMenuBar {
 
 	private JFrame window;
 	
-	private JMenuItem AboutMenuItem;
+	private About AboutMenuItem;
 	
-	private JMenuItem CloseMenuItem;
+	private Close CloseMenuItem;
 	
 	/**
 	 * 
 	 */
-	public BattleshipMenu(JFrame window) {
+	public BattleshipMenu(JFrame window, BattleshipPanel battleshipPanel) {
 		this.window=window;
 		JMenu menu = new JMenu("Menu");
 		
-		this.AboutMenuItem = new JMenuItem("About");
-		this.CloseMenuItem = new JMenuItem("Close");
+		this.AboutMenuItem = new About("About");
+		this.CloseMenuItem = new Close("Close",battleshipPanel);
 		menu.add(this.AboutMenuItem);
 		menu.add(this.CloseMenuItem);
-		//this.AboutMenuItem.addActionListener(this);
-		//this.CloseMenuItem.addActionListener(this);
 		
 		this.add(menu);
 	}

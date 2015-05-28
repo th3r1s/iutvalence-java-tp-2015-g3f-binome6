@@ -1,7 +1,6 @@
 package fr.iutvalence.theris.battleship.view.gui;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.border.Border;
@@ -15,16 +14,18 @@ public class Launcher extends JSplitPane{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private Launch playButton;
+	
 	public Launcher(BattleshipPanel battleshipPanel) {
 		super(JSplitPane.VERTICAL_SPLIT);
-		battleshipPanel.getWindow().setJMenuBar(new BattleshipMenu(battleshipPanel.getWindow()));
+		battleshipPanel.getWindow().setJMenuBar(new BattleshipMenu(battleshipPanel.getWindow(),battleshipPanel));
 		
 		PlayerPanel players = new PlayerPanel();
 	    Border border = BorderFactory.createTitledBorder("Joueurs" );
 	    players.setBorder(border);
 	    
 		JPanel init = new JPanel();
-		Launch playButton = new Launch("Lancer la partie", battleshipPanel, players.getPlayer1(), players.getPlayer2());
+		playButton = new Launch("Lancer la partie", battleshipPanel, players.getPlayer1(), players.getPlayer2());
 		init.add(playButton);
 		
 		add(players);

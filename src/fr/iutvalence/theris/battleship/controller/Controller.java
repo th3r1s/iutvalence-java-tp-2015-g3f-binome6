@@ -27,8 +27,8 @@ public class Controller {
 		SwingUtilities.invokeLater(this.battleshipPanel);
 	}
 	
-	public Player getPlayer(int num_player){
-		if (num_player==1)
+	public Player getPlayer(int n_player){
+		if (n_player==1)
 			return game.getPlayer1();
 		else return game.getPlayer2();
 	}
@@ -68,7 +68,6 @@ public class Controller {
 			b = new Battleship();
 			break;
 		}
-		
 		getPlayerBoard(n_player).createBoat(d, l, b);
 		return false;
 	}
